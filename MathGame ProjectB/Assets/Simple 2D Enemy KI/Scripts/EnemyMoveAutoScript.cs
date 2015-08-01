@@ -171,7 +171,7 @@ public class EnemyMoveAutoScript : MonoBehaviour {
 				GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpForceUpForward);
 				
 				// Save as temp variable
-				float JumpForwardSpeedTempValue = MaxSpeed;
+				float JumpForwardSpeedTempValue = MaxSpeed * 1.125f;
 
 				if(!facingRight){
 					JumpForwardSpeedTempValue = JumpForwardSpeedTempValue * -1;	
