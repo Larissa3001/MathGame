@@ -56,10 +56,14 @@
      <Compile Include="Assets\Project B\Scripts\Elements\Element6.cs" />
      <Compile Include="Assets\Project B\Scripts\Elements\Element7.cs" />
      <Compile Include="Assets\Project B\Scripts\Elements\Element8.cs" />
+     <Compile Include="Assets\Project B\Scripts\Elements\Element9.cs" />
+     <Compile Include="Assets\Project B\Scripts\EndBossMovement.cs" />
+     <Compile Include="Assets\Project B\Scripts\EndBossStatePoint.cs" />
      <Compile Include="Assets\Project B\Scripts\GameValues.cs" />
      <Compile Include="Assets\Project B\Scripts\Level.cs" />
      <Compile Include="Assets\Project B\Scripts\Level\LevelList3Enemies.cs" />
      <Compile Include="Assets\Project B\Scripts\Level\LevelList4Enemies.cs" />
+     <Compile Include="Assets\Project B\Scripts\Level\MathTaskEndBoss1.cs" />
      <Compile Include="Assets\Project B\Scripts\Level\MathTaskLevel1.cs" />
      <Compile Include="Assets\Project B\Scripts\Level\MathTaskLevel2.cs" />
      <Compile Include="Assets\Project B\Scripts\Level\MathTaskLevel3.cs" />
@@ -70,6 +74,7 @@
      <Compile Include="Assets\Project B\Scripts\PickElement.cs" />
      <Compile Include="Assets\Project B\Scripts\PlayerShootController.cs" />
      <Compile Include="Assets\Project B\Scripts\PlayerShootObject.cs" />
+     <Compile Include="Assets\Project B\Scripts\TopFixEndBoss.cs" />
      <Compile Include="Assets\Simple 2D Enemy KI\EnemyAWConst\EnemyAWConst.cs" />
      <Compile Include="Assets\Simple 2D Enemy KI\Scripts\BounceTrigger.cs" />
      <Compile Include="Assets\Simple 2D Enemy KI\Scripts\EnemyAutoShootController.cs" />
