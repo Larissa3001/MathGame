@@ -31,7 +31,7 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 	public float GroundedCheckRadius = 0.35f;
 	
 	public float MaxSpeed = 6.0f;
-	public float JumpForceUp = 1300f;
+	public float JumpForceUp = 1500f;
 	public float JumpForceUpForward = 750f;
 	
 	// Need for flip enemy
