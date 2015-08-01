@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		PlayerPrefs.SetInt ("BossDamage",0);
 
 	}
 	
@@ -41,5 +42,7 @@ public class MainMenu : MonoBehaviour
 		PlayerPrefs.SetInt ("Level3",0);
 		PlayerPrefs.SetInt ("Level4",0);
 		PlayerPrefs.SetInt ("Level5",0);
+		PlayerPrefs.SetInt ("Level6",0);
+		PlayerPrefs.SetInt ("BossDamage",0);
 	}
 }

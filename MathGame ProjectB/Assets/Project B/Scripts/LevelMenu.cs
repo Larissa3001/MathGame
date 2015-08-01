@@ -8,8 +8,9 @@ public class LevelMenu : MonoBehaviour
 	bool bL3 = false;
 	bool bL4 = false;
 	bool bL5 = false;
+	bool bL6 = false;
 
-	int BL2, BL3, BL4, BL5;
+	int BL2, BL3, BL4, BL5, BL6;
 
 	public static string CLvl;
 
@@ -39,7 +40,11 @@ public class LevelMenu : MonoBehaviour
 		if(BL5 == 1){
 			bL5 = true;
 		}
-
+		BL6 = PlayerPrefs.GetInt ("Level6");
+		
+		if(BL6 == 1){
+			bL6 = true;
+		}
 	}
 	
 	// Update is called once per frame
@@ -90,6 +95,13 @@ public class LevelMenu : MonoBehaviour
 				CLvl = "Level5";
 
 				Application.LoadLevel (Level.Level5);
+			}
+		}
+		if(bL6 == true){
+			if (GUI.Button (new Rect (425, Screen.height / 2 - 100, 150, 25), "Level6")) {
+				CLvl = "Level6";
+				
+				Application.LoadLevel (Level.Level6);
 			}
 		}
 		

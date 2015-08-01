@@ -9,24 +9,24 @@ using System.Collections.Generic;
  * 2 EnemyAutoWalkAndPlayerFollowing
  * 3 Enemy Auto Shoot
  * 
- * You find the EnemyMoveAutoScript as an Enemy-Component
+ * You find the EndBossMovement as an Enemy-Component
  */
-public class EnemyMoveAutoScript: MonoBehaviour {
-
+public class EndBossMovement: MonoBehaviour {
+	
 	// If the PlayerFollwing is enabled the enemies takes other decisions on the EnemyStatePointController-Triggers
 	// Player is above enemy: Jump. Play is below enemy: Move forward and reach the level below
 	public bool PlayerFollowing = false;
 	private Transform target;
-
+	
 	// Range for checking if player is above or below the enemy.
 	private float range = 0.2f; 
-
+	
 	// Enemy to some auto jumps after time
 	public bool EnemyAutoPeriodJumpUp = true;
 	public float EnemyAutoJumpUpTimeDelayMin = 2.0f;
 	public float EnemyAutoJumpUpTimeDelayMax = 5.0f;
 	private bool IsInCoRoutineAutoJumpUp = false;
-
+	
 	// If you change the collider-size you must change the size of this variable too
 	public float GroundedCheckRadius = 0.35f;
 	
@@ -36,62 +36,69 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 	
 	// Need for flip enemy
 	private float horizontalPositionOld = 0.0f;
-
+	
 	private bool moveRight = true;
-
-
+	
+	
 	[HideInInspector]
 	public bool facingRight = true;
-
+	
 	private bool Jump = false;
 	private bool JumpInProgress = false;
 	private bool JumpFromBeginningToEnd = false;
-
+	
 	[HideInInspector]
 	public EnemyStates EnemyState = EnemyStates.MOVE_FORWARD;
-
+	
 	// If enemy do jump then disable autowalk
 	private bool StopWalking = false; 
 	
 	// Need for jumping through walls
 	public bool JumpThroughWalls = false;
 	private float highestJumpCoordinate = 0.0f;
-
+	
 	public Transform GroundCheck;
 	[HideInInspector]
 	public bool Grounded = false;
 	private LayerMask whatIsGround;
-
+	
 	public CircleCollider2D EnemyTriggerCollider;
 	public Collider2D EnemyJumpCollider;
-
+	
 	private Animator anim;
-
+	
 	//added
+
 	bool EnemyDie = false;
+
+	public int health = 0;
 	
 	public Renderer rend;
-
-
+	
+	
 	void Awake(){
-
+		
 		anim = gameObject.GetComponent<Animator> ();
-
+		
 		whatIsGround = LayerMask.GetMask (EnemyAWConst.GROUND);
-
+		
 		// Need for flip enemy
 		horizontalPositionOld = transform.localPosition.x;
-
+		
 		// Enemy should not collide with other enemys
 		Physics2D.IgnoreLayerCollision (LayerMask.NameToLayer (EnemyAWConst.ENEMY), LayerMask.NameToLayer (EnemyAWConst.ENEMY), true);
 	}
-
+	
 	void Start() {
+
 		//added
 		EnemyDie = false;
 
+		PlayerPrefs.SetInt ("BossDamage", 0);
+		
 		rend = GetComponent<Renderer>();
 		rend.enabled = true;
+
 		
 		// Random direction at start
 		int ran = Random.Range (0, 2);
@@ -102,14 +109,14 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 			moveRight = false;
 		}
 	}
-
+	
 	void Update(){
-
+		
 		//added
 		if(EnemyDie){
 			Destroy(gameObject);
 		}
-
+		
 		if(gameObject.transform.position.y < 6.5f && rend.enabled == false){
 			gameObject.transform.position = new Vector3 (-6.65f,10f,0);
 		}
@@ -118,19 +125,21 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 		}
 
 
-
+		
+		
+		
 		switch (EnemyState) {
-			case EnemyStates.JUMP_FORWARD:
-				Jump = true;
-				break;
-			case EnemyStates.JUMP_UP:
-				Jump = true;
-				break;
-			case EnemyStates.MOVE_FORWARD:
-				// do nothing, move automatically
-				break;
+		case EnemyStates.JUMP_FORWARD:
+			Jump = true;
+			break;
+		case EnemyStates.JUMP_UP:
+			Jump = true;
+			break;
+		case EnemyStates.MOVE_FORWARD:
+			// do nothing, move automatically
+			break;
 		}
-
+		
 		// Set the enemy-animations
 		if (!Grounded) {
 			anim.SetBool (EnemyAWConst.WALK, false);
@@ -139,7 +148,7 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 		} else {
 			anim.SetBool (EnemyAWConst.GROUND, true);
 			anim.SetBool (EnemyAWConst.JUMP, false);
-
+			
 			if(StopWalking){
 				anim.SetBool (EnemyAWConst.WALK, false);
 			} else {
@@ -147,39 +156,39 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void FixedUpdate(){
-
+		
 		Grounded = Physics2D.OverlapCircle (GroundCheck.position, GroundedCheckRadius, whatIsGround);
-
+		
 		if (Jump && !JumpFromBeginningToEnd && Grounded && !JumpInProgress) {
-
+			
 			JumpFromBeginningToEnd = true;
 			Jump = false;
 			JumpInProgress = true;
 			StopWalking = true;
-
+			
 			// Get actual position
 			highestJumpCoordinate = gameObject.transform.position.y; 
 			// and fix it
 			highestJumpCoordinate -= 0.1f;
-
+			
 			// Jump up and forward
 			if(EnemyState.Equals(EnemyStates.JUMP_FORWARD)){
-
+				
 				GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpForceUpForward);
 				
 				// Save as temp variable
 				float JumpForwardSpeedTempValue = MaxSpeed * 1.125f;
-
+				
 				if(!facingRight){
 					JumpForwardSpeedTempValue = JumpForwardSpeedTempValue * -1;	
 				}
 				
 				GetComponent<Rigidbody2D>().velocity = new Vector2( JumpForwardSpeedTempValue, GetComponent<Rigidbody2D>().velocity.y );
-
-			// Jump up
+				
+				// Jump up
 			} else if(EnemyState.Equals(EnemyStates.JUMP_UP)){
 				
 				GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
@@ -187,41 +196,41 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 				
 			}
 		}
-
+		
 		if (JumpInProgress) {
-
+			
 			// This is the jumping process. If the enemy should jump through walls the
 			// ground layer will be disable on up-jump and will be enabled when the enemy arrive the highest jump-point
 			float actualY = gameObject.transform.localPosition.y;
 			
 			if(actualY > highestJumpCoordinate){
 				highestJumpCoordinate = actualY;
-
+				
 				if(JumpThroughWalls){
 					EnemyJumpCollider.enabled = false;
 				}
 				
 			} else {
-
+				
 				if(JumpThroughWalls){
 					EnemyJumpCollider.enabled = true;
 				}
-
+				
 				JumpInProgress = false;
-		
+				
 				// Wait a little bit to continue auto walking
 				StartCoroutine(ResumeAutoWalkAfterTime(0.2f));
 			}
-		
-		
+			
+			
 		} else {
-
+			
 			// Auto walk when grounded
 			if(!StopWalking && Grounded){
-
+				
 				// Save x value to for checking flip
 				horizontalPositionOld = transform.position.x;
-
+				
 				if(moveRight) {
 					transform.Translate(Vector3.right * Time.deltaTime * MaxSpeed);
 				} else {
@@ -241,7 +250,7 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 						facingRight = true;
 					}
 				}
-
+				
 				// If EnemyAutoJumpUp activated the jump in certain intervals
 				EnemyAutoJumpUpAfterTime();
 			}
@@ -249,11 +258,11 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 	}
 	
 	private void EnemyAutoJumpUpAfterTime(){
-
+		
 		if (EnemyAutoPeriodJumpUp) {
-
+			
 			if (Grounded && !IsInCoRoutineAutoJumpUp && !Jump && !JumpInProgress) {
-
+				
 				IsInCoRoutineAutoJumpUp = true;
 				StartCoroutine(AutoJumpUpAfterTime(Random.Range (EnemyAutoJumpUpTimeDelayMin, EnemyAutoJumpUpTimeDelayMax)));
 			}
@@ -262,17 +271,17 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 	
 	IEnumerator ResumeAutoWalkAfterTime(float time){
 		yield return (new WaitForSeconds (time));
-
+		
 		EnemyState = EnemyStates.MOVE_FORWARD;
 		StopWalking = false;
 		JumpFromBeginningToEnd = false;
 	}
-
+	
 	public void ChangeDirection(){
-
+		
 		if(Grounded){
-
-
+			
+			
 			if (facingRight) {
 				moveRight = false;
 			} else {
@@ -280,7 +289,7 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void Flip(){
 		
 		facingRight = !facingRight;
@@ -288,36 +297,41 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
-
+	
 	private void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag.Equals (EnemyAWConst.FIELD_EDGE)) {
 			ChangeDirection();
 		}
 		//added
 		if (col.gameObject.tag.Equals (EnemyAWConst.SHOOTSTAR)) { 
+			health += 1;
+			PlayerPrefs.SetInt("BossDamage",health);
+			if(health == 18){
 			EnemyDie = true;
 			Destroy(col.gameObject);
 			print ("dieeeeeeeeeeeeeee");
+			}
+
 		}
 		if (col.gameObject.tag.Equals (EnemyAWConst.VISIBLE)) { 
 			rend.enabled = true;
 			
 		}
 	}
-
+	
 	IEnumerator AutoJumpUpAfterTime(float time){
 		yield return (new WaitForSeconds (time));
 		
 		if (Grounded && !Jump && !JumpInProgress) {
-
+			
 			GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 			StopWalking = true;
-
+			
 			// Change direction after jump?
 			if(Random.Range (0, 3) == 1){
 				ChangeDirection();
 			}
-
+			
 			// It looks better when enemy looks around before jump
 			Flip ();
 			yield return (new WaitForSeconds (0.3f));
@@ -333,7 +347,7 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 		
 		IsInCoRoutineAutoJumpUp = false;	
 	}
-
+	
 	private void InitPlayerTransform(){
 		
 		if (target == null) {
@@ -344,12 +358,12 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 			}
 		}
 	}
-
-
+	
+	
 	public void DoEnemyStatePointAction(bool jump_up, bool jump_forward, bool move_forward, bool move_directionChange){
-
+		
 		if (Grounded && !Jump && !JumpInProgress && !JumpFromBeginningToEnd) {
-
+			
 			List<EnemyStates> EnemyStateList = new List<EnemyStates> ();
 			
 			if (jump_up) {
@@ -359,11 +373,11 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 			if (jump_forward) {
 				
 				if(PlayerFollowing){
-				
+					
 					InitPlayerTransform();
-
+					
 					if(target != null){
-
+						
 						if (target.position.y > (transform.position.y - range)) {
 							// Player is above
 							EnemyStateList.Add(EnemyStates.JUMP_FORWARD);
@@ -371,42 +385,42 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 							// Player is down
 							EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 						}
-
+						
 					} else {
 						EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 					}
-
+					
 				} else {
 					EnemyStateList.Add(EnemyStates.JUMP_FORWARD);
 				}
 			}
 			
 			if (move_forward) {
-
+				
 				if(PlayerFollowing){
-
+					
 					InitPlayerTransform();
-
+					
 					if(target != null){
-
+						
 						if (target.position.y > (transform.position.y + range)) {
 							// Player is above
 							EnemyStateList.Add(EnemyStates.JUMP_FORWARD);
-
+							
 						} else {
 							// Player is down
 							EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 						}
-
+						
 					} else {
 						EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 					}
-
+					
 				} else {
 					EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 				}
 			}
-
+			
 			if(move_directionChange){
 				EnemyStateList.Add(EnemyStates.MOVE_CHANGEDIRECTION);
 				ChangeDirection();
@@ -416,11 +430,11 @@ public class EnemyMoveAutoScript: MonoBehaviour {
 				EnemyStateList.Add(EnemyStates.JUMP_FORWARD);
 				EnemyStateList.Add(EnemyStates.MOVE_FORWARD);
 			}
-		
+			
 			EnemyState = EnemyStateList[Random.Range (0, EnemyStateList.Count)];
 		}
 	}
-
+	
 	
 	public enum EnemyStates {
 		JUMP_UP,
