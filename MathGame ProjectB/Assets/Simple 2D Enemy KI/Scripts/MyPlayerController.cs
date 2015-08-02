@@ -35,9 +35,13 @@ public class MyPlayerController : MonoBehaviour {
 
 	//added
 	public Renderer rend;
+	bool Edge;
 
 
 	void Awake(){
+
+		Edge = false;
+
 		rend = GetComponent<Renderer>();
 		rend.enabled = true;
 
@@ -184,8 +188,13 @@ public class MyPlayerController : MonoBehaviour {
 			
 			if (jump) {
 				jump = false;
-				
+
 				if (grounded) {
+
+					if(Edge){
+						//dont Jump
+					}
+					else{
 					
 					PlayerBoxCollider.isTrigger = true;
 					
@@ -193,6 +202,8 @@ public class MyPlayerController : MonoBehaviour {
 					GetComponent<Rigidbody2D>().AddForce (Vector2.up * JumpForce, ForceMode2D.Impulse);
 					
 					jumpInProgress = true;
+					
+					}
 					
 				}
 			}
@@ -219,6 +230,16 @@ public class MyPlayerController : MonoBehaviour {
 		if(col.gameObject.tag.Equals(EnemyAWConst.COLLIDER)){
 			rend.enabled = false;
 			gameObject.transform.position = new Vector3(0, 5.39f, 0);
+		}
+		if(col.gameObject.tag.Equals(EnemyAWConst.FIELD_EDGE)){
+			Edge = true;
+			PlayerBoxCollider.isTrigger = false;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D col){
+		if(col.gameObject.tag.Equals(EnemyAWConst.FIELD_EDGE)){
+			Edge = false;
 		}
 	}
 }
