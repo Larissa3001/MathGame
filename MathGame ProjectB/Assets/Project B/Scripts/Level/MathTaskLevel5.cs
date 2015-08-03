@@ -98,8 +98,8 @@ public class MathTaskLevel5 : MonoBehaviour {
 	void OnGUI(){
 		
 		if (bMathTask5 && bShow5) {
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 			
 			GUI.Label (new Rect (100,75, 400, 400), MathTaskStr5);
 			GUI.Label (new Rect (100,100, 400, 400), "M = { x | x < 3 }");

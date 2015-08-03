@@ -118,8 +118,8 @@ public class MathTaskLevel4 : MonoBehaviour {
 	void OnGUI(){
 		
 		if (bMathTask4 && bShow4) {
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 
 			GUI.Label (new Rect (100,50, 400, 400),"M1 = {2; 3; 5; 7} ");
 			GUI.Label (new Rect (100,75, 600, 400), MathTaskStr4);
