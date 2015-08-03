@@ -184,23 +184,23 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 
 	void SetMathTasks (){
 
-		MathTask1Str = "Welche Elemente gehören zur Menge: A = {Farben heller als Blau} ?";
+		MathTask1Str = "Wähle die Elemente die zur Menge M = A geschnitten B gehören.";
 
 		bEL1TF = false;
 		bEL2TF = true;
-		bEL3TF = true;
+		bEL3TF = false;
 
-		MathTask2Str = "Welche Elemente gehören zur Menge: A = {Farbe Orange} ?";
+		MathTask2Str = "Wähle die Elemente die zur Menge M = A vereinigt B gehören.";
 
-		bEL4TF = false;
+		bEL4TF = true;
 		bEL5TF = true;
-		bEL6TF = false;
+		bEL6TF = true;
 
-		MathTask3Str = "Welche Elemente gehören zur Menge: A = {Alle außer Schwarz} ?";
+		MathTask3Str = "Wähle die Elemente die zur Menge M = A ohne B gehören.";
 
 		bEL7TF = true;
-		bEL8TF = false;
-		bEL9TF = true;
+		bEL8TF = true;
+		bEL9TF = false;
 
 	}
 
@@ -211,8 +211,9 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 			Time.timeScale = 0; 
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
-			GUI.Label (new Rect (100,100, 400, 400), MathTask1Str);
+
+			GUI.Label (new Rect (100,100, 400, 400), "A = {3; 5; 7}, B= {4; 5; 6} ");
+			GUI.Label (new Rect (100,125, 400, 400), MathTask1Str);
 			
 			
 			toggle11button = GUI.Toggle (new Rect (50, 175, 100, 50), toggle11button, icon1el1, "button");
@@ -264,8 +265,9 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 			Time.timeScale = 0; 
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
-			GUI.Label (new Rect (100,100, 400, 400), MathTask2Str);
+
+			GUI.Label (new Rect (100,100, 400, 400), "A = {1}, B= {4; 7} ");
+			GUI.Label (new Rect (100,125, 400, 400), MathTask2Str);
 			
 			
 			toggle21button = GUI.Toggle (new Rect (50, 175, 100, 50), toggle21button, icon2el1, "button");
@@ -318,8 +320,9 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 			Time.timeScale = 0; 
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
-			GUI.Label (new Rect (100,100, 400, 400), MathTask3Str);
+
+			GUI.Label (new Rect (100,100, 400, 400), "A = {3; 5; 7}, B= {4; 5; 6} ");
+			GUI.Label (new Rect (100,125, 400, 400), MathTask3Str);
 			
 			
 			toggle31button = GUI.Toggle (new Rect (50, 175, 100, 50), toggle31button, icon3el1, "button");

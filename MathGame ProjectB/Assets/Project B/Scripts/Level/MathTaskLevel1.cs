@@ -80,11 +80,11 @@ public class MathTaskLevel1 : MonoBehaviour {
 	
 	void SetMathTask() {
 
-			MathTaskStr = "Welche Elemente gehören zur Menge: A = {Farben heller als Blau} ?";
+			MathTaskStr = "Fülle die Lücke so, dass die Aussage wahr wird.";
 		
-			bEL2TF = true;
-			bEL1TF = false;
-			bEL3TF = true;
+			bEL2TF = false;
+			bEL1TF = true;
+			bEL3TF = false;
 
 	}
 
@@ -96,7 +96,7 @@ public class MathTaskLevel1 : MonoBehaviour {
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
 		
 			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr);
-		
+			GUI.Label (new Rect (100,125, 400, 400), "x ist ein Element von A => x ___ A");
 		
 			toggle1 = GUI.Toggle (new Rect (50, 175, 100, 50), toggle1, iconel1, "button");
 			toggle2 = GUI.Toggle (new Rect (250, 175, 100, 50), toggle2, iconel2, "button");

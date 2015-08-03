@@ -19,6 +19,11 @@ public class LevelMenu : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		bL2 = true;
+		bL3 = true;
+		bL4 = true;
+		bL5 = true;
+		bL6 = true;
 
 
 		BL2 = PlayerPrefs.GetInt ("Level2");
