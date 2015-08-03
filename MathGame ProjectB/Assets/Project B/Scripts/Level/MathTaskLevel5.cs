@@ -45,6 +45,8 @@ public class MathTaskLevel5 : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
+		Time.timeScale = 1;
 		
 		bShow5 = true;
 		
