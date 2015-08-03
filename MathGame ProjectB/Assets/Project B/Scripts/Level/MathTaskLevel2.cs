@@ -33,6 +33,7 @@ public class MathTaskLevel2 : MonoBehaviour {
 
 	int pickedElements;
 
+	bool bstart;
 
 	
 	public static bool changeCurrentToNext2;
@@ -42,14 +43,14 @@ public class MathTaskLevel2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
+		bstart = true;
 		bShow2 = true;
 
 		pickedElements = 0;
 
-		iconel12 = Element1.Element1Icon;			
+		/*iconel12 = Element1.Element1Icon;			
 		iconel22 = Element2.Element2Icon;
-		iconel32 = Element3.Element3Icon;
+		iconel32 = Element3.Element3Icon;*/
 
 		changeCurrentToNext2 = false;
 		
@@ -60,14 +61,28 @@ public class MathTaskLevel2 : MonoBehaviour {
 		
 		SetMathTask2 ();
 
-		MTask2.Add(iconel12,bEL1TF2);
+		/*MTask2.Add(iconel12,bEL1TF2);
 		MTask2.Add(iconel22,bEL2TF2);
-		MTask2.Add(iconel32,bEL3TF2);
+		MTask2.Add(iconel32,bEL3TF2);*/
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (bstart) {
+		
+			iconel12 = Element1.Element1Icon;			
+			iconel22 = Element2.Element2Icon;
+			iconel32 = Element3.Element3Icon;
+
+			MTask2.Add(iconel12,bEL1TF2);
+			MTask2.Add(iconel22,bEL2TF2);
+			MTask2.Add(iconel32,bEL3TF2);
+
+			bstart = false;
+		}
+
 
 
 		pickedElements = GameValues.pickedEle;
@@ -80,9 +95,9 @@ public class MathTaskLevel2 : MonoBehaviour {
 	
 	void SetMathTask2() {
 		
-		MathTaskStr2 = "Welche Elemente gehören zur Menge: A = {Blau} ?";
+		MathTaskStr2 = "Wähle die Elemente aus, die Element von der Menge P sind.";
 		
-		bEL2TF2 = false;
+		bEL2TF2 = true;
 		bEL1TF2 = true;
 		bEL3TF2 = false;
 		
@@ -94,8 +109,9 @@ public class MathTaskLevel2 : MonoBehaviour {
 		if (bMathTask2 && bShow2) {
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
-			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr2);
+
+			GUI.Label (new Rect (100,100, 400, 400),"P sei die Menge der Primzahlen.");
+			GUI.Label (new Rect (100,125, 400, 400), MathTaskStr2);
 			
 			
 			toggle12 = GUI.Toggle (new Rect (50, 175, 100, 50), toggle12, iconel12, "button");

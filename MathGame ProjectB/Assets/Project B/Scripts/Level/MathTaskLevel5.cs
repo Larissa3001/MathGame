@@ -85,12 +85,12 @@ public class MathTaskLevel5 : MonoBehaviour {
 	
 	void SetMathTask() {
 		
-		MathTaskStr5 = "Welche Elemente gehören zur Menge: A = {Enthält die Farbe rot} ?";
+		MathTaskStr5 = "Wähle alle Elemente die zur Menge M gehören.";
 		
 		bEL2TF5  = true;
 		bEL1TF5  = true;
-		bEL3TF5  = true;
-		bEL4TF5  = false;
+		bEL3TF5  = false;
+		bEL4TF5  = true;
 		
 	}
 	
@@ -101,8 +101,8 @@ public class MathTaskLevel5 : MonoBehaviour {
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
 			
-			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr5);
-			
+			GUI.Label (new Rect (100,75, 400, 400), MathTaskStr5);
+			GUI.Label (new Rect (100,100, 400, 400), "M = { x | x < 3 }");
 			
 			toggle15 = GUI.Toggle (new Rect (50, 175, 100, 50), toggle15, iconel15, "button");
 			toggle25 = GUI.Toggle (new Rect (250, 175, 100, 50), toggle25, iconel25, "button");

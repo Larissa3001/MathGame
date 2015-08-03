@@ -86,11 +86,11 @@ public class MathTaskLevel3 : MonoBehaviour {
 	
 	void SetMathTask3() {
 		
-		MathTaskStr3 = "Welche Elemente gehören zur Menge: A = {Farben die Orange mischen} ?";
+		MathTaskStr3 = "Wähle das Element aus, welches die folgene Aussage wahr macht!";
 		
-		bEL2TF3 = false;
-		bEL1TF3 = true;
-		bEL3TF3 = true;
+		bEL2TF3 = true;
+		bEL1TF3 = false;
+		bEL3TF3 = false;
 		
 	}
 	
@@ -100,8 +100,9 @@ public class MathTaskLevel3 : MonoBehaviour {
 		if (bMathTask3 && bShow3) {
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
+
 			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr3);
+			GUI.Label (new Rect (100,125, 400, 400)," ___ ∈ {1;2{1;2}} ");
 			
 			
 			toggle13 = GUI.Toggle (new Rect (50, 175, 100, 50), toggle13, iconel13, "button");

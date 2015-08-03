@@ -39,6 +39,8 @@ public class MathTaskLevel4 : MonoBehaviour {
 
 	Time Time;
 
+	bool bstart;
+
 	
 	public static bool changeCurrentToNext4;
 	
@@ -46,15 +48,16 @@ public class MathTaskLevel4 : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+
+		bstart = true;
 		bShow4 = true;
 
 		pickedElements = 0;
 		
-		iconel14 = Element1.Element1Icon;			
+		/*iconel14 = Element1.Element1Icon;			
 		iconel24 = Element2.Element2Icon;
 		iconel34 = Element3.Element3Icon;
-		iconel44 = Element4.Element4Icon;
+		iconel44 = Element4.Element4Icon;*/
 		
 		changeCurrentToNext4 = false;
 		
@@ -65,15 +68,31 @@ public class MathTaskLevel4 : MonoBehaviour {
 		
 		SetMathTask ();
 		
-		MTask4.Add(iconel14,bEL1TF4);
+	/*	MTask4.Add(iconel14,bEL1TF4);
 		MTask4.Add(iconel24,bEL2TF4);
 		MTask4.Add(iconel34,bEL3TF4);
-		MTask4.Add(iconel44,bEL4TF4);
+		MTask4.Add(iconel44,bEL4TF4);*/
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (bstart) {
+
+			iconel14 = Element1.Element1Icon;			
+			iconel24 = Element2.Element2Icon;
+			iconel34 = Element3.Element3Icon;
+			iconel44 = Element4.Element4Icon;
+
+			MTask4.Add(iconel14,bEL1TF4);
+			MTask4.Add(iconel24,bEL2TF4);
+			MTask4.Add(iconel34,bEL3TF4);
+			MTask4.Add(iconel44,bEL4TF4);
+		
+			bstart = false;
+		}
+
 		
 		pickedElements = GameValues.pickedEle;
 		
@@ -86,12 +105,12 @@ public class MathTaskLevel4 : MonoBehaviour {
 	
 	void SetMathTask() {
 		
-		MathTaskStr4 = "Welche Elemente gehören zur Menge: A = {Enthält die Farbe rot} ?";
+		MathTaskStr4 = "Wähle alle die Elemente, die zu einer der möglichen Teilmenge (M2) von M1 gehören.";
 		
 		bEL2TF4  = true;
 		bEL1TF4  = true;
-		bEL3TF4  = true;
-		bEL4TF4  = false;
+		bEL3TF4  = false;
+		bEL4TF4  = true;
 		
 	}
 	
@@ -101,9 +120,10 @@ public class MathTaskLevel4 : MonoBehaviour {
 		if (bMathTask4 && bShow4) {
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
 			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
-			
-			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr4);
-			
+
+			GUI.Label (new Rect (100,50, 400, 400),"M1 = {2; 3; 5; 7} ");
+			GUI.Label (new Rect (100,75, 600, 400), MathTaskStr4);
+			GUI.Label (new Rect (100,100, 400, 400),"M2 ist Teilmenge von M1. M2 = { ... } ");
 			
 			toggle14 = GUI.Toggle (new Rect (50, 175, 100, 50), toggle14, iconel14, "button");
 			toggle24 = GUI.Toggle (new Rect (250, 175, 100, 50), toggle24, iconel24, "button");
