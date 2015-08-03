@@ -20,6 +20,7 @@ public class LevelMenu : MonoBehaviour
 	void Start () 
 	{
 
+
 		BL2 = PlayerPrefs.GetInt ("Level2");
 		
 		if(BL2 == 1){
