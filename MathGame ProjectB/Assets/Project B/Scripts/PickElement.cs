@@ -30,7 +30,7 @@ public class PickElement : MonoBehaviour {
 		YPos = GameValues.IconHeight;
 
 		if (bPickUp) {
-			if(Input.GetButtonDown("Fire1")){
+			if(Input.GetKeyDown("e")){
 				PickUp();
 			}
 		}
