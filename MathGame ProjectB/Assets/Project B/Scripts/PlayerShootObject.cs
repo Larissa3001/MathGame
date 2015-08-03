@@ -17,6 +17,9 @@ public class PlayerShootObject : MonoBehaviour {
 			transform.Translate (Vector3.right * Time.deltaTime * maxSpeed);
 		} else if (Left) {
 			transform.Translate (Vector3.left * Time.deltaTime * maxSpeed);
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
 		}
 
 		if (transform.position.x > 10 || transform.position.x < -10) {
