@@ -107,8 +107,8 @@ public class MathTaskLevel2 : MonoBehaviour {
 	void OnGUI(){
 		
 		if (bMathTask2 && bShow2) {
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 
 			GUI.Label (new Rect (100,100, 400, 400),"P sei die Menge der Primzahlen.");
 			GUI.Label (new Rect (100,125, 400, 400), MathTaskStr2);

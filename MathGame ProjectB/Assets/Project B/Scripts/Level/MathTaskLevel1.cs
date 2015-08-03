@@ -36,18 +36,21 @@ public class MathTaskLevel1 : MonoBehaviour {
 
 	public static bool changeCurrentToNext;
 
+	bool bstart;
+
 
 
 	// Use this for initialization
 	void Start () {
 
+		bstart = true;
 		bShow = true;
 
 		pickedElements = 0;
 
-		iconel1 = Element1.Element1Icon;			
-		iconel2 = Element2.Element2Icon;
-		iconel3 = Element3.Element3Icon;
+		//iconel1 = Element1.Element1Icon;			
+		//iconel2 = Element2.Element2Icon;
+		//iconel3 = Element3.Element3Icon;
 
 		changeCurrentToNext = false;
 
@@ -58,15 +61,28 @@ public class MathTaskLevel1 : MonoBehaviour {
 
 		SetMathTask ();
 
-		MTask.Add(iconel1,bEL1TF);
-		MTask.Add(iconel2,bEL2TF);
-		MTask.Add(iconel3,bEL3TF);
+		//MTask.Add(iconel1,bEL1TF);
+		//MTask.Add(iconel2,bEL2TF);
+		//MTask.Add(iconel3,bEL3TF);
 
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(bstart){
+
+			iconel1 = Element1.Element1Icon;			
+			iconel2 = Element2.Element2Icon;
+			iconel3 = Element3.Element3Icon;
+
+			MTask.Add(iconel1,bEL1TF);
+			MTask.Add(iconel2,bEL2TF);
+			MTask.Add(iconel3,bEL3TF);
+
+			bstart = false;
+		}
 
 		pickedElements = GameValues.pickedEle;
 
@@ -92,8 +108,8 @@ public class MathTaskLevel1 : MonoBehaviour {
 	void OnGUI(){
 		
 		if (bMathTask && bShow) {
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 		
 			GUI.Label (new Rect (100,100, 400, 400), MathTaskStr);
 			GUI.Label (new Rect (100,125, 400, 400), "x ist ein Element von A => x ___ A");

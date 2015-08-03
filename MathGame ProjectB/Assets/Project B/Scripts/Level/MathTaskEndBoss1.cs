@@ -209,8 +209,8 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 		
 		if (b1MathTask && b1Show) {
 			Time.timeScale = 0; 
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 
 			GUI.Label (new Rect (100,100, 400, 400), "A = {3; 5; 7}, B= {4; 5; 6} ");
 			GUI.Label (new Rect (100,125, 400, 400), MathTask1Str);
@@ -263,8 +263,8 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 
 		if (b2MathTask && b2Show) {
 			Time.timeScale = 0; 
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 
 			GUI.Label (new Rect (100,100, 400, 400), "A = {1}, B= {4; 7} ");
 			GUI.Label (new Rect (100,125, 400, 400), MathTask2Str);
@@ -318,8 +318,8 @@ public class MathTaskEndBoss1 : MonoBehaviour {
 
 		if (b3MathTask && b3Show) {
 			Time.timeScale = 0; 
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "");
-			GUI.Box (new Rect (5, Screen.height / 2 - 200, 593, 400), "MathTask");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "");
+			GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "MathTask");
 
 			GUI.Label (new Rect (100,100, 400, 400), "A = {3; 5; 7}, B= {4; 5; 6} ");
 			GUI.Label (new Rect (100,125, 400, 400), MathTask3Str);
