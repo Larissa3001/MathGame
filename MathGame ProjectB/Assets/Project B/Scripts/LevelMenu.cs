@@ -62,7 +62,7 @@ public class LevelMenu : MonoBehaviour
 	void OnGUI(){
 		
 		
-		GUI.Box (new Rect (10, Screen.height / 2 - 200, 593, 400), "Choose your Level:");
+		GUI.Box (new Rect (4, Screen.height / 2 - 200, 580, 400), "Choose your Level:");
 
 		if(bL1 == true){
 			if (GUI.Button (new Rect (35, Screen.height / 2 - 150, 150, 25), "Level1")) {
